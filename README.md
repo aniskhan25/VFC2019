@@ -1,1 +1,2 @@
-# VFC2019
+# Vehicular Fog Computing
+The model is written in AnyLogic simulation software.
