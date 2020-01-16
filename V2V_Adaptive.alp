@@ -4,10 +4,10 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.4.0.201903251705" AlpVersion="8.4.6">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.5.1.201910011850" AlpVersion="8.4.9">
 <Model>
 	<Id>1562302524322</Id>
-	<Name><![CDATA[V2V_Simple]]></Name>
+	<Name><![CDATA[V2V_Adaptive]]></Name>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[v2v_simple]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Second]]></ModelTimeUnit>
@@ -107,6 +107,7 @@
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668018</CurrentLevel>
 			<ConnectionsId>1562302524324</ConnectionsId>
 			<Outputs>
 				<Output>
@@ -328,7 +329,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[100]]></Code>
+							<Code><![CDATA[500]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1562578831839</Id>
@@ -352,7 +353,7 @@
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[100]]></Code>
+							<Code><![CDATA[500]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1562578831842</Id>
@@ -362,6 +363,21 @@
 							<DelimeterType>NO_DELIMETER</DelimeterType>
 						</ParameterEditor>
 					</Properties>                 
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1579164459012</Id>
+					<Name><![CDATA[regret]]></Name>
+					<X>-150</X><Y>15</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Double]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
 				</Variable>
 			</Variables>
 			<Connectors>
@@ -1302,6 +1318,43 @@ System.out.println("AvgCmpTime: " + (totalCompTime / numOfVeh) );
 System.out.println("AvgTasksExecPerVeh: " + (numOfCompletedTasks / numOfVeh) );
 System.out.println("Efficiency: " + (numOfCompletedTasks / (numOfCompletedTasks + failures) )*100);
 System.out.println("------------------------------------------------");
+   
+for (double d : regret) {
+//	System.out.format("%.3f\n", d);
+}]]></Action>
+				</Event>
+				<Event>
+					<Id>1579165124153</Id>
+					<Name><![CDATA[init]]></Name>
+					<X>-150</X><Y>465</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties TriggerType="timeout" Mode="occuresOnce">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</Timeout>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_SECOND]]></Unit>
+						</Rate>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1562659200000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[MILLISECOND]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+						</RecurrenceCode>
+						<Condition><![CDATA[false]]></Condition>
+					</Properties>
+					<Action><![CDATA[for (int i = 0;i<3600;i++){
+	regret.add(0.0);
+}
 ]]></Action>
 				</Event>
 			</Events>
@@ -4347,7 +4400,20 @@ System.out.println("------------------------------------------------");
 				</EmbeddedObject>
 			</EmbeddedObjects>
 
-			<Shapes>
+			<Presentation>
+				<Level>
+					<Id>1579153668018</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+			<Presentation>
 				<EmbeddedObjectPresentation>
 					<Id>1562578831835</Id>
 					<Name><![CDATA[vehicle_presentation]]></Name>
@@ -4390,7 +4456,7 @@ System.out.println("------------------------------------------------");
 					<ShowLaneConnectors>true</ShowLaneConnectors>
 					<SignalStateAnimationVisible>true</SignalStateAnimationVisible>
 
-			<Shapes>
+			<Presentation>
 				<Road TargetId="1562578954708">
 					<Id>1562578954706</Id>
 					<Name><![CDATA[road]]></Name>
@@ -4428,7 +4494,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>84.714</X><Y>0.429</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954764</Id>
 					<Name><![CDATA[stopLine17]]></Name>
@@ -4451,11 +4517,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954708</Id>
 					<Name><![CDATA[intersection9]]></Name>
@@ -4468,7 +4532,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954706" TargetId="1562578954710">
 					<Id>1562578954766</Id>
 					<Name><![CDATA[laneConnector10]]></Name>
@@ -4500,7 +4564,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954706" TargetId="1562578954710">
 					<Id>1562578954768</Id>
 					<Name><![CDATA[laneConnector11]]></Name>
@@ -4528,7 +4591,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954756">
 					<Id>1562578954770</Id>
 					<Name><![CDATA[laneConnector12]]></Name>
@@ -4553,7 +4615,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954706">
 					<Id>1562578954772</Id>
 					<Name><![CDATA[laneConnector13]]></Name>
@@ -4581,7 +4642,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954706">
 					<Id>1562578954774</Id>
 					<Name><![CDATA[laneConnector14]]></Name>
@@ -4609,7 +4669,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954756">
 					<Id>1562578954776</Id>
 					<Name><![CDATA[laneConnector17]]></Name>
@@ -4634,7 +4693,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954756">
 					<Id>1562578954778</Id>
 					<Name><![CDATA[laneConnector18]]></Name>
@@ -4659,7 +4717,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954756" TargetId="1562578954712">
 					<Id>1562578954780</Id>
 					<Name><![CDATA[laneConnector19]]></Name>
@@ -4684,7 +4741,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954756" TargetId="1562578954712">
 					<Id>1562578954782</Id>
 					<Name><![CDATA[laneConnector20]]></Name>
@@ -4709,7 +4765,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954706">
 					<Id>1562578954784</Id>
 					<Name><![CDATA[laneConnector22]]></Name>
@@ -4734,7 +4789,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954706" TargetId="1562578954712">
 					<Id>1562578954786</Id>
 					<Name><![CDATA[laneConnector23]]></Name>
@@ -4759,7 +4813,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954710">
 					<Id>1562578954788</Id>
 					<Name><![CDATA[laneConnector26]]></Name>
@@ -4784,7 +4837,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954712">
 					<Id>1562578954790</Id>
 					<Name><![CDATA[laneConnector28]]></Name>
@@ -4809,7 +4861,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954756" TargetId="1562578954710">
 					<Id>1562578954792</Id>
 					<Name><![CDATA[laneConnector8]]></Name>
@@ -4834,7 +4885,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954756" TargetId="1562578954710">
 					<Id>1562578954794</Id>
 					<Name><![CDATA[laneConnector65]]></Name>
@@ -4859,7 +4909,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954756">
 					<Id>1562578954796</Id>
 					<Name><![CDATA[laneConnector]]></Name>
@@ -4884,7 +4933,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954706">
 					<Id>1562578954798</Id>
 					<Name><![CDATA[laneConnector3]]></Name>
@@ -4909,7 +4957,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954706" TargetId="1562578954712">
 					<Id>1562578954800</Id>
 					<Name><![CDATA[laneConnector4]]></Name>
@@ -4934,7 +4981,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954710">
 					<Id>1562578954802</Id>
 					<Name><![CDATA[laneConnector5]]></Name>
@@ -4959,7 +5005,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954712">
 					<Id>1562578954804</Id>
 					<Name><![CDATA[laneConnector6]]></Name>
@@ -4984,11 +5029,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954708" TargetId="1562578954728">
 					<Id>1562578954710</Id>
 					<Name><![CDATA[road2]]></Name>
@@ -5017,7 +5060,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>6.44799999999999</X><Y>0</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954806</Id>
 					<Name><![CDATA[stopLine2]]></Name>
@@ -5040,7 +5083,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954808</Id>
 					<Name><![CDATA[stopLine22]]></Name>
@@ -5063,11 +5105,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954708" TargetId="1562578954724">
 					<Id>1562578954712</Id>
 					<Name><![CDATA[road3]]></Name>
@@ -5096,7 +5136,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>0.22362227369147603</X><Y>7.714496665407154</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954810</Id>
 					<Name><![CDATA[stopLine3]]></Name>
@@ -5119,7 +5159,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954812</Id>
 					<Name><![CDATA[stopLine16]]></Name>
@@ -5142,11 +5181,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954714</Id>
 					<Name><![CDATA[intersection1]]></Name>
@@ -5159,7 +5196,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954752">
 					<Id>1562578954814</Id>
 					<Name><![CDATA[laneConnector48]]></Name>
@@ -5187,7 +5224,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954752">
 					<Id>1562578954816</Id>
 					<Name><![CDATA[laneConnector49]]></Name>
@@ -5215,7 +5251,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954752" TargetId="1562578954748">
 					<Id>1562578954818</Id>
 					<Name><![CDATA[laneConnector50]]></Name>
@@ -5243,7 +5278,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954752" TargetId="1562578954748">
 					<Id>1562578954820</Id>
 					<Name><![CDATA[laneConnector51]]></Name>
@@ -5271,7 +5305,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954754">
 					<Id>1562578954822</Id>
 					<Name><![CDATA[laneConnector53]]></Name>
@@ -5296,7 +5329,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954754" TargetId="1562578954748">
 					<Id>1562578954824</Id>
 					<Name><![CDATA[laneConnector54]]></Name>
@@ -5321,7 +5353,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954752">
 					<Id>1562578954826</Id>
 					<Name><![CDATA[laneConnector31]]></Name>
@@ -5346,7 +5377,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954752" TargetId="1562578954722">
 					<Id>1562578954828</Id>
 					<Name><![CDATA[laneConnector33]]></Name>
@@ -5371,7 +5401,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954754">
 					<Id>1562578954830</Id>
 					<Name><![CDATA[laneConnector34]]></Name>
@@ -5399,7 +5428,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954754">
 					<Id>1562578954832</Id>
 					<Name><![CDATA[laneConnector35]]></Name>
@@ -5427,7 +5455,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954754" TargetId="1562578954722">
 					<Id>1562578954834</Id>
 					<Name><![CDATA[laneConnector39]]></Name>
@@ -5452,7 +5479,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954754" TargetId="1562578954722">
 					<Id>1562578954836</Id>
 					<Name><![CDATA[laneConnector40]]></Name>
@@ -5477,7 +5503,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954722">
 					<Id>1562578954838</Id>
 					<Name><![CDATA[laneConnector47]]></Name>
@@ -5502,7 +5527,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954748">
 					<Id>1562578954840</Id>
 					<Name><![CDATA[laneConnector29]]></Name>
@@ -5527,7 +5551,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954752">
 					<Id>1562578954842</Id>
 					<Name><![CDATA[laneConnector30]]></Name>
@@ -5552,7 +5575,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954748">
 					<Id>1562578954844</Id>
 					<Name><![CDATA[laneConnector45]]></Name>
@@ -5577,7 +5599,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954722">
 					<Id>1562578954846</Id>
 					<Name><![CDATA[laneConnector46]]></Name>
@@ -5602,7 +5623,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954752" TargetId="1562578954722">
 					<Id>1562578954848</Id>
 					<Name><![CDATA[laneConnector101]]></Name>
@@ -5627,7 +5647,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954754" TargetId="1562578954748">
 					<Id>1562578954850</Id>
 					<Name><![CDATA[laneConnector32]]></Name>
@@ -5652,7 +5671,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954754">
 					<Id>1562578954852</Id>
 					<Name><![CDATA[laneConnector37]]></Name>
@@ -5677,11 +5695,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<RoadJunction>
 					<Id>1562578954716</Id>
 					<Name><![CDATA[intersection3]]></Name>
@@ -5694,7 +5710,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954758">
 					<Id>1562578954854</Id>
 					<Name><![CDATA[laneConnector77]]></Name>
@@ -5719,7 +5735,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954758" TargetId="1562578954718">
 					<Id>1562578954856</Id>
 					<Name><![CDATA[laneConnector83]]></Name>
@@ -5744,7 +5759,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954750">
 					<Id>1562578954858</Id>
 					<Name><![CDATA[laneConnector84]]></Name>
@@ -5773,7 +5787,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954750">
 					<Id>1562578954860</Id>
 					<Name><![CDATA[laneConnector85]]></Name>
@@ -5796,7 +5809,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954750" TargetId="1562578954718">
 					<Id>1562578954862</Id>
 					<Name><![CDATA[laneConnector86]]></Name>
@@ -5819,7 +5831,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954750" TargetId="1562578954718">
 					<Id>1562578954864</Id>
 					<Name><![CDATA[laneConnector87]]></Name>
@@ -5845,7 +5856,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954758">
 					<Id>1562578954866</Id>
 					<Name><![CDATA[laneConnector75]]></Name>
@@ -5873,7 +5883,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954758">
 					<Id>1562578954868</Id>
 					<Name><![CDATA[laneConnector76]]></Name>
@@ -5901,7 +5910,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954758" TargetId="1562578954734">
 					<Id>1562578954870</Id>
 					<Name><![CDATA[laneConnector79]]></Name>
@@ -5929,7 +5937,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954758" TargetId="1562578954734">
 					<Id>1562578954872</Id>
 					<Name><![CDATA[laneConnector80]]></Name>
@@ -5957,7 +5964,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954750">
 					<Id>1562578954874</Id>
 					<Name><![CDATA[laneConnector82]]></Name>
@@ -5982,7 +5988,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954750" TargetId="1562578954734">
 					<Id>1562578954876</Id>
 					<Name><![CDATA[laneConnector88]]></Name>
@@ -6007,7 +6012,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954718">
 					<Id>1562578954878</Id>
 					<Name><![CDATA[laneConnector108]]></Name>
@@ -6032,7 +6036,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954734">
 					<Id>1562578954880</Id>
 					<Name><![CDATA[laneConnector110]]></Name>
@@ -6057,7 +6060,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954750" TargetId="1562578954734">
 					<Id>1562578954882</Id>
 					<Name><![CDATA[laneConnector7]]></Name>
@@ -6082,7 +6084,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954750">
 					<Id>1562578954884</Id>
 					<Name><![CDATA[laneConnector16]]></Name>
@@ -6107,7 +6108,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954758" TargetId="1562578954718">
 					<Id>1562578954886</Id>
 					<Name><![CDATA[laneConnector21]]></Name>
@@ -6132,7 +6132,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954718">
 					<Id>1562578954888</Id>
 					<Name><![CDATA[laneConnector24]]></Name>
@@ -6157,7 +6156,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954758">
 					<Id>1562578954890</Id>
 					<Name><![CDATA[laneConnector25]]></Name>
@@ -6182,7 +6180,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954734">
 					<Id>1562578954892</Id>
 					<Name><![CDATA[laneConnector27]]></Name>
@@ -6207,11 +6204,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954720" TargetId="1562578954716">
 					<Id>1562578954718</Id>
 					<Name><![CDATA[road14]]></Name>
@@ -6240,7 +6235,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-0.33382846351516393</X><Y>-22.361785295070224</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954894</Id>
 					<Name><![CDATA[stopLine12]]></Name>
@@ -6263,7 +6258,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954896</Id>
 					<Name><![CDATA[stopLine21]]></Name>
@@ -6286,11 +6280,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954720</Id>
 					<Name><![CDATA[intersection5]]></Name>
@@ -6303,7 +6295,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954742">
 					<Id>1562578954898</Id>
 					<Name><![CDATA[laneConnector132]]></Name>
@@ -6326,7 +6318,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954718" TargetId="1562578954742">
 					<Id>1562578954900</Id>
 					<Name><![CDATA[laneConnector133]]></Name>
@@ -6349,7 +6340,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954718">
 					<Id>1562578954902</Id>
 					<Name><![CDATA[laneConnector139]]></Name>
@@ -6372,7 +6362,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954718">
 					<Id>1562578954904</Id>
 					<Name><![CDATA[laneConnector140]]></Name>
@@ -6395,7 +6384,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954736" TargetId="1562578954718">
 					<Id>1562578954906</Id>
 					<Name><![CDATA[laneConnector134]]></Name>
@@ -6420,7 +6408,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954736" TargetId="1562578954742">
 					<Id>1562578954908</Id>
 					<Name><![CDATA[laneConnector135]]></Name>
@@ -6445,7 +6432,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954736" TargetId="1562578954718">
 					<Id>1562578954910</Id>
 					<Name><![CDATA[laneConnector78]]></Name>
@@ -6470,7 +6456,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954736" TargetId="1562578954742">
 					<Id>1562578954912</Id>
 					<Name><![CDATA[laneConnector81]]></Name>
@@ -6495,11 +6480,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954724" TargetId="1562578954714">
 					<Id>1562578954722</Id>
 					<Name><![CDATA[road13]]></Name>
@@ -6528,7 +6511,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>0</X><Y>4.412</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954914</Id>
 					<Name><![CDATA[stopLine4]]></Name>
@@ -6551,7 +6534,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954916</Id>
 					<Name><![CDATA[stopLine18]]></Name>
@@ -6574,11 +6556,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954724</Id>
 					<Name><![CDATA[intersection4]]></Name>
@@ -6591,7 +6571,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954722">
 					<Id>1562578954918</Id>
 					<Name><![CDATA[laneConnector115]]></Name>
@@ -6614,7 +6594,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954722">
 					<Id>1562578954920</Id>
 					<Name><![CDATA[laneConnector116]]></Name>
@@ -6637,7 +6616,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954712">
 					<Id>1562578954922</Id>
 					<Name><![CDATA[laneConnector119]]></Name>
@@ -6660,7 +6638,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954712">
 					<Id>1562578954924</Id>
 					<Name><![CDATA[laneConnector120]]></Name>
@@ -6683,7 +6660,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954726">
 					<Id>1562578954926</Id>
 					<Name><![CDATA[laneConnector118]]></Name>
@@ -6708,7 +6684,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954726">
 					<Id>1562578954928</Id>
 					<Name><![CDATA[laneConnector123]]></Name>
@@ -6733,7 +6708,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954712" TargetId="1562578954726">
 					<Id>1562578954930</Id>
 					<Name><![CDATA[laneConnector73]]></Name>
@@ -6758,7 +6732,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954722" TargetId="1562578954726">
 					<Id>1562578954932</Id>
 					<Name><![CDATA[laneConnector74]]></Name>
@@ -6783,11 +6756,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954724" TargetId="1562578954732">
 					<Id>1562578954726</Id>
 					<Name><![CDATA[road12]]></Name>
@@ -6819,7 +6790,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>23.357</X><Y>0</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954934</Id>
 					<Name><![CDATA[stopLine25]]></Name>
@@ -6842,11 +6813,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954728</Id>
 					<Name><![CDATA[intersection6]]></Name>
@@ -6859,7 +6828,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954710">
 					<Id>1562578954936</Id>
 					<Name><![CDATA[laneConnector147]]></Name>
@@ -6888,7 +6857,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954710">
 					<Id>1562578954938</Id>
 					<Name><![CDATA[laneConnector148]]></Name>
@@ -6916,7 +6884,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954734">
 					<Id>1562578954940</Id>
 					<Name><![CDATA[laneConnector151]]></Name>
@@ -6944,7 +6911,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954734">
 					<Id>1562578954942</Id>
 					<Name><![CDATA[laneConnector152]]></Name>
@@ -6972,7 +6938,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954730">
 					<Id>1562578954944</Id>
 					<Name><![CDATA[laneConnector150]]></Name>
@@ -6997,7 +6962,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954734" TargetId="1562578954730">
 					<Id>1562578954946</Id>
 					<Name><![CDATA[laneConnector9]]></Name>
@@ -7022,7 +6986,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954730">
 					<Id>1562578954948</Id>
 					<Name><![CDATA[laneConnector62]]></Name>
@@ -7047,7 +7010,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954710" TargetId="1562578954730">
 					<Id>1562578954950</Id>
 					<Name><![CDATA[laneConnector15]]></Name>
@@ -7072,11 +7034,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954728" TargetId="1562578954732">
 					<Id>1562578954730</Id>
 					<Name><![CDATA[road15]]></Name>
@@ -7105,7 +7065,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-0.454</X><Y>17.012</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954952</Id>
 					<Name><![CDATA[stopLine26]]></Name>
@@ -7128,11 +7088,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954732</Id>
 					<Name><![CDATA[intersection7]]></Name>
@@ -7145,7 +7103,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954730" TargetId="1562578954736">
 					<Id>1562578954954</Id>
 					<Name><![CDATA[laneConnector126]]></Name>
@@ -7170,7 +7128,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954726" TargetId="1562578954736">
 					<Id>1562578954956</Id>
 					<Name><![CDATA[laneConnector127]]></Name>
@@ -7198,7 +7155,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954726" TargetId="1562578954736">
 					<Id>1562578954958</Id>
 					<Name><![CDATA[laneConnector128]]></Name>
@@ -7226,7 +7182,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954730" TargetId="1562578954740">
 					<Id>1562578954960</Id>
 					<Name><![CDATA[laneConnector136]]></Name>
@@ -7249,7 +7204,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954726" TargetId="1562578954740">
 					<Id>1562578954962</Id>
 					<Name><![CDATA[laneConnector137]]></Name>
@@ -7274,7 +7228,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954730" TargetId="1562578954736">
 					<Id>1562578954964</Id>
 					<Name><![CDATA[laneConnector36]]></Name>
@@ -7299,11 +7252,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954728" TargetId="1562578954716">
 					<Id>1562578954734</Id>
 					<Name><![CDATA[road16]]></Name>
@@ -7332,7 +7283,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>2.2600842655572926</X><Y>0.02918591464803605</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954966</Id>
 					<Name><![CDATA[stopLine11]]></Name>
@@ -7355,7 +7306,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954968</Id>
 					<Name><![CDATA[stopLine24]]></Name>
@@ -7378,11 +7328,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954732" TargetId="1562578954720">
 					<Id>1562578954736</Id>
 					<Name><![CDATA[road17]]></Name>
@@ -7411,7 +7359,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>26.436</X><Y>0.461</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954970</Id>
 					<Name><![CDATA[stopLine20]]></Name>
@@ -7434,11 +7382,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954738</Id>
 					<Name><![CDATA[intersection8]]></Name>
@@ -7451,7 +7397,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954746">
 					<Id>1562578954972</Id>
 					<Name><![CDATA[laneConnector186]]></Name>
@@ -7479,7 +7425,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954748" TargetId="1562578954746">
 					<Id>1562578954974</Id>
 					<Name><![CDATA[laneConnector187]]></Name>
@@ -7507,7 +7452,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954748">
 					<Id>1562578954976</Id>
 					<Name><![CDATA[laneConnector189]]></Name>
@@ -7535,7 +7479,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954748">
 					<Id>1562578954978</Id>
 					<Name><![CDATA[laneConnector190]]></Name>
@@ -7563,7 +7506,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954740" TargetId="1562578954748">
 					<Id>1562578954980</Id>
 					<Name><![CDATA[laneConnector138]]></Name>
@@ -7588,7 +7530,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954740" TargetId="1562578954746">
 					<Id>1562578954982</Id>
 					<Name><![CDATA[laneConnector142]]></Name>
@@ -7613,7 +7554,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954740" TargetId="1562578954746">
 					<Id>1562578954984</Id>
 					<Name><![CDATA[laneConnector38]]></Name>
@@ -7638,7 +7578,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954740" TargetId="1562578954748">
 					<Id>1562578954986</Id>
 					<Name><![CDATA[laneConnector42]]></Name>
@@ -7663,11 +7602,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954732" TargetId="1562578954738">
 					<Id>1562578954740</Id>
 					<Name><![CDATA[road18]]></Name>
@@ -7696,7 +7633,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>0</X><Y>5.038</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954988</Id>
 					<Name><![CDATA[stopLine29]]></Name>
@@ -7719,11 +7656,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954744" TargetId="1562578954720">
 					<Id>1562578954742</Id>
 					<Name><![CDATA[road9]]></Name>
@@ -7752,7 +7687,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>0.019358767074635463</X><Y>-2.8195892212004345</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578954990</Id>
 					<Name><![CDATA[stopLine14]]></Name>
@@ -7775,7 +7710,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578954992</Id>
 					<Name><![CDATA[stopLine19]]></Name>
@@ -7798,11 +7732,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<RoadJunction>
 					<Id>1562578954744</Id>
 					<Name><![CDATA[intersection2]]></Name>
@@ -7815,7 +7747,7 @@ System.out.println("------------------------------------------------");
 					<Z>0</Z>
 					<FakeNode>false</FakeNode>
 
-			<Shapes>
+			<Presentation>
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954762">
 					<Id>1562578954994</Id>
 					<Name><![CDATA[laneConnector97]]></Name>
@@ -7840,7 +7772,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954762">
 					<Id>1562578954996</Id>
 					<Name><![CDATA[laneConnector98]]></Name>
@@ -7865,7 +7796,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954762" TargetId="1562578954742">
 					<Id>1562578954998</Id>
 					<Name><![CDATA[laneConnector99]]></Name>
@@ -7890,7 +7820,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954762" TargetId="1562578954742">
 					<Id>1562578955000</Id>
 					<Name><![CDATA[laneConnector100]]></Name>
@@ -7915,7 +7844,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954760">
 					<Id>1562578955002</Id>
 					<Name><![CDATA[laneConnector59]]></Name>
@@ -7944,7 +7872,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954760">
 					<Id>1562578955004</Id>
 					<Name><![CDATA[laneConnector60]]></Name>
@@ -7973,7 +7900,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954760" TargetId="1562578954746">
 					<Id>1562578955006</Id>
 					<Name><![CDATA[laneConnector63]]></Name>
@@ -8002,7 +7928,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>0</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954760" TargetId="1562578954746">
 					<Id>1562578955008</Id>
 					<Name><![CDATA[laneConnector64]]></Name>
@@ -8031,7 +7956,6 @@ System.out.println("------------------------------------------------");
 					<TargetLane>1</TargetLane>
 					<CustomPoints>true</CustomPoints>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954742">
 					<Id>1562578955010</Id>
 					<Name><![CDATA[laneConnector66]]></Name>
@@ -8056,7 +7980,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954746">
 					<Id>1562578955012</Id>
 					<Name><![CDATA[laneConnector67]]></Name>
@@ -8081,7 +8004,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954762">
 					<Id>1562578955014</Id>
 					<Name><![CDATA[laneConnector94]]></Name>
@@ -8106,7 +8028,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954746">
 					<Id>1562578955016</Id>
 					<Name><![CDATA[laneConnector41]]></Name>
@@ -8131,7 +8052,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954760" TargetId="1562578954742">
 					<Id>1562578955018</Id>
 					<Name><![CDATA[laneConnector43]]></Name>
@@ -8156,7 +8076,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954762" TargetId="1562578954746">
 					<Id>1562578955020</Id>
 					<Name><![CDATA[laneConnector58]]></Name>
@@ -8181,7 +8100,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954762">
 					<Id>1562578955022</Id>
 					<Name><![CDATA[laneConnector61]]></Name>
@@ -8206,7 +8124,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954746" TargetId="1562578954742">
 					<Id>1562578955024</Id>
 					<Name><![CDATA[laneConnector52]]></Name>
@@ -8231,7 +8148,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954762" TargetId="1562578954746">
 					<Id>1562578955026</Id>
 					<Name><![CDATA[laneConnector55]]></Name>
@@ -8256,7 +8172,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954760">
 					<Id>1562578955028</Id>
 					<Name><![CDATA[laneConnector56]]></Name>
@@ -8281,7 +8196,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954742" TargetId="1562578954760">
 					<Id>1562578955030</Id>
 					<Name><![CDATA[laneConnector44]]></Name>
@@ -8306,7 +8220,6 @@ System.out.println("------------------------------------------------");
 					<SourceLane>1</SourceLane>
 					<TargetLane>1</TargetLane>
 				</LaneConnector>
-
 				<LaneConnector SourceId="1562578954760" TargetId="1562578954742">
 					<Id>1562578955032</Id>
 					<Name><![CDATA[laneConnector57]]></Name>
@@ -8331,11 +8244,9 @@ System.out.println("------------------------------------------------");
 					<SourceLane>0</SourceLane>
 					<TargetLane>0</TargetLane>
 				</LaneConnector>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadJunction>
-
 				<Road SourceId="1562578954738" TargetId="1562578954744">
 					<Id>1562578954746</Id>
 					<Name><![CDATA[road19]]></Name>
@@ -8364,7 +8275,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>11.19407083499932</X><Y>0.10361157488256773</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955034</Id>
 					<Name><![CDATA[stopLine8]]></Name>
@@ -8387,7 +8298,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578955036</Id>
 					<Name><![CDATA[stopLine30]]></Name>
@@ -8410,11 +8320,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954714" TargetId="1562578954738">
 					<Id>1562578954748</Id>
 					<Name><![CDATA[road6]]></Name>
@@ -8443,7 +8351,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>11.916</X><Y>-0.108</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955038</Id>
 					<Name><![CDATA[stopLine7]]></Name>
@@ -8466,7 +8374,6 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
 				<RoadStopline>
 					<Id>1562578955040</Id>
 					<Name><![CDATA[stopLine28]]></Name>
@@ -8489,11 +8396,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road TargetId="1562578954716">
 					<Id>1562578954750</Id>
 					<Name><![CDATA[road11]]></Name>
@@ -8525,7 +8430,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-1</X><Y>102.774</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955042</Id>
 					<Name><![CDATA[stopLine15]]></Name>
@@ -8548,11 +8453,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road TargetId="1562578954714">
 					<Id>1562578954752</Id>
 					<Name><![CDATA[road4]]></Name>
@@ -8581,7 +8484,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>86.424</X><Y>-0.097</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955044</Id>
 					<Name><![CDATA[stopLine5]]></Name>
@@ -8604,11 +8507,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954714">
 					<Id>1562578954754</Id>
 					<Name><![CDATA[road5]]></Name>
@@ -8637,7 +8538,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-0.979</X><Y>-120.952</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955046</Id>
 					<Name><![CDATA[stopLine6]]></Name>
@@ -8660,11 +8561,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road TargetId="1562578954708">
 					<Id>1562578954756</Id>
 					<Name><![CDATA[road1]]></Name>
@@ -8696,7 +8595,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-0.109</X><Y>118.898</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955048</Id>
 					<Name><![CDATA[stopLine1]]></Name>
@@ -8719,11 +8618,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>false</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954716">
 					<Id>1562578954758</Id>
 					<Name><![CDATA[road10]]></Name>
@@ -8752,7 +8649,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-143.706</X><Y>3.5</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955050</Id>
 					<Name><![CDATA[stopLine13]]></Name>
@@ -8775,11 +8672,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road SourceId="1562578954744">
 					<Id>1562578954760</Id>
 					<Name><![CDATA[road8]]></Name>
@@ -8808,7 +8703,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>-101.246</X><Y>0.988</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955052</Id>
 					<Name><![CDATA[stopLine10]]></Name>
@@ -8831,11 +8726,9 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
 				<Road TargetId="1562578954744">
 					<Id>1562578954762</Id>
 					<Name><![CDATA[road7]]></Name>
@@ -8864,7 +8757,7 @@ System.out.println("------------------------------------------------");
 						<Point><X>0.01200000000000001</X><Y>-69.109</Y><Z>0</Z></Point>
 					</Points>
 
-			<Shapes>
+			<Presentation>
 				<RoadStopline>
 					<Id>1562578955054</Id>
 					<Name><![CDATA[stopLine9]]></Name>
@@ -8887,16 +8780,16 @@ System.out.println("------------------------------------------------");
 					<YieldSign>true</YieldSign>
 					<EndOfSpeedLimitSign>false</EndOfSpeedLimitSign>
 				</RoadStopline>
-
-			</Shapes>
+			</Presentation>
 
 				</Road>
-
-			</Shapes>
+			</Presentation>
 
 				</RoadNetwork>
+			</Presentation>
 
-			</Shapes>
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -9004,6 +8897,7 @@ if( (this.taskExecution.waitTime != 0) && (this.taskExecution.compTime != 0) && 
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668022</CurrentLevel>
 			<ConnectionsId>1562302557516</ConnectionsId>
 			<Outputs>
 				<Output>
@@ -9268,7 +9162,20 @@ send("assign", taskAssignment)
 				</EmbeddedObject>
 			</EmbeddedObjects>
 
-			<Shapes>
+			<Presentation>
+				<Level>
+					<Id>1579153668022</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+			<Presentation>
 				<Oval>
 					<Id>1562302586874</Id>
 					<Name><![CDATA[oval]]></Name>
@@ -9329,8 +9236,13 @@ send("assign", taskAssignment)
 					<Rotation>0.0</Rotation>
 					<AxisOrder>YZX_AXIS_ORDER</AxisOrder>
 					<ApplyShading>true</ApplyShading>
+					<InternalLighting>OFF</InternalLighting>
+					<IgnoreSceneLights>false</IgnoreSceneLights>
 				</Figure3D>
-			</Shapes>
+			</Presentation>
+
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -9429,6 +9341,7 @@ send("assign", taskAssignment)
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668017</CurrentLevel>
 			<ConnectionsId>1562303090804</ConnectionsId>
 			<Variables>
 				<Variable Class="Parameter">
@@ -9503,6 +9416,22 @@ send("assign", taskAssignment)
 			</AgentLinks>
 
 
+			<Presentation>
+				<Level>
+					<Id>1579153668017</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -9600,6 +9529,7 @@ send("assign", taskAssignment)
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668019</CurrentLevel>
 			<ConnectionsId>1562303220956</ConnectionsId>
 			<Variables>
 				<Variable Class="Parameter">
@@ -9668,6 +9598,22 @@ send("assign", taskAssignment)
 			</AgentLinks>
 
 
+			<Presentation>
+				<Level>
+					<Id>1579153668019</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -9799,6 +9745,7 @@ double phops(double d){
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668020</CurrentLevel>
 			<ConnectionsId>1562304274671</ConnectionsId>
 			<Variables>
 				<Variable Class="PlainVariable">
@@ -9959,30 +9906,33 @@ double phops(double d){
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[// compute data rate
-    
-double x = 1024, y = 1024, w = this.task.mips;
+						<EntryAction><![CDATA[double mn = 200000, mx = 1000000; // [0.2,1.0] Mbits
 
-double xp = max( min((x-0)/(1024-0),1) ,0);
+double x = uniform(mn,mx,new Random()); // input (bits)
+double y = x; // output (bits)
+double w = this.task.mips;
 
-double B  =  20; // bandwidth (MHz)
-double P  =  36; // channel power (W)
-double N0 = 110; // noise power spectral density (W/MHz)
+double xp = max( min((x-mn)/(mx-mn),1) ,0); // normalized IO
+
+double B  = 10; // bandwidth (MHz)
+double P  = 0.1; // channel power (W)
+double N0 = 10e-13; // noise power spectral density (W/MHz)
 	
-double dr = B * ( Math.log(1 + P/(N0*B)) / Math.log(2) );
+double dr = B * ( Math.log(1 + P/(N0*B)) / Math.log(2) ); // data rate
 
-double beta = 2.0; // ?
+double beta = 0.5; // MAB constant
 
-double T = time(MILLISECOND);
+double T = time(MILLISECOND); // current sim time
 
-double u, ds, f, t;
+double u, ds, f, t, lu;
 int id, k;
 
-// Populate
+// POPULATE in range vehicle list
 
 curr.clear();
 
 for(vehicle v : main.vehicle) {
+
 	double d = this.vehicle.distanceTo(v);
 	
 	if(d < vehicleInRange && d>0.0) {
@@ -9991,12 +9941,12 @@ for(vehicle v : main.vehicle) {
 		
 		f = v.localMips;
 	
-		// compute sum delay    
-		ds = x/dr + (x*w)/f + y/dr;
+		// delay
+		ds = x/dr + (x*w)/f + y/dr + v.taskExecution.waitTime;
 
 		MyList key = new MyList(id);
 		
-		if(prev.contains(key)) {
+		if(prev.contains(key)) { // in list
 		
 			MyList tmp = new MyList(id);
 			for (MyList obj : prev) {
@@ -10009,26 +9959,31 @@ for(vehicle v : main.vehicle) {
 			u = tmp.getU();
 			k = tmp.getK();
 			t = tmp.getT();
-					
-			// calculate utility function
-			u -= Math.sqrt( (beta * (1 - xp) * (Math.log(T-t)/Math.log(2))) / k );
-						
+											
+			// calculate utility
+			lu = Math.sqrt( (beta * (1 - xp) * (Math.log(T-t)/Math.log(2))) / k );
+			u -= lu;
+													
 			tmp.setU(u);
+			tmp.setLU(lu);
 			tmp.setDS(ds);
+			tmp.setT(T);
 
 			prev.remove(tmp);
 			prev.add(tmp);
 			curr.add(tmp);
 			
-			//System.out.println("u:" + u);
 		}
-		else {
+		else { // first time
+		
 			prev.add(new MyList(id, ds/x, 1, ds, T));
 			curr.add(new MyList(id, ds/x, 1, ds, T));
+			
 		}
 	}
 }
 
+// GET vehicle (key) with min utilization
 double minU = Double.POSITIVE_INFINITY;
 MyList min_key = new MyList();
 for (MyList obj : curr) {
@@ -10038,20 +9993,24 @@ for (MyList obj : curr) {
 	}
 }
 
-if(Double.isInfinite(minU)){
+if(Double.isInfinite(minU)) // local compute
+
 	selectedVehicle = this.vehicle;
-}
-else {
-		
+
+else { // offload
+
+	// SELECT vehicle
+			
 	u  = min_key.getU();
+	lu = min_key.getLU();
 	k  = min_key.getK();
 	ds = min_key.getDS();
 	t  = min_key.getT();
-
-	u += Math.sqrt( (beta * (1 - xp) * (Math.log(T-t)/Math.log(2))) / k );
-	u -= (u*k + ds/x) / (k+1);
+	
+	u += lu; // undo utilization for selected vehicle
+	u -= (u*k + ds/x) / (k+1); // recompute
 	k++;
-
+	
 	min_key.setU(u);
 	min_key.setK(k);
 	min_key.setDS(ds);
@@ -10062,11 +10021,25 @@ else {
 	
 	double min_id = min_key.getId();
 	selectedVehicle = findFirst( main.vehicle, p -> p.getId() == min_id );
-	
-	//System.out.println("U:" + minU + "; Id:" + selectedVehicle.getId());
-}
 
-//System.out.println("gotcha");
+/*
+	// COMPUTE regret
+
+	int idx = (int) Math.round(T/1000); // index corresponds to seconds
+	
+	double regret = 0.0;
+	for (MyList obj : curr) {
+		regret += (obj.getU() - min_key.getU());
+	}
+	if (curr.size() - 1 > 0)
+		regret /= (curr.size() - 1);
+		
+	if(regret>0.0)
+		main.regret.set(idx, (main.regret.get(idx) + regret)/2);
+		
+	//System.out.println("U:" + minU + "; Id:" + selectedVehicle.getId());
+*/
+}
 ]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -10351,6 +10324,22 @@ return (delay);
 				</ContainerLink>
 			</ContainerLinks>
 
+			<Presentation>
+				<Level>
+					<Id>1579153668020</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -10448,6 +10437,7 @@ return (delay);
 				<Scale>10</Scale>
 				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
 			</ScaleRuler>
+			<CurrentLevel>1579153668021</CurrentLevel>
 			<ConnectionsId>1562304309511</ConnectionsId>
 			<Outputs>
 				<Output>
@@ -10836,6 +10826,22 @@ else{
 				</ContainerLink>
 			</ContainerLinks>
 
+			<Presentation>
+				<Level>
+					<Id>1579153668021</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>ALWAYS_SHOW</LevelVisibility>
+
+
+				</Level>
+			</Presentation>
 
 		</ActiveObjectClass>
 	</ActiveObjectClasses>	
@@ -10899,7 +10905,7 @@ else{
 			<VmArgs><![CDATA[]]></VmArgs>
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
 
-			<Shapes>
+			<Presentation>
 				<Text>
 					<Id>0</Id>
 					<Name><![CDATA[text]]></Name>
@@ -10921,7 +10927,7 @@ else{
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
-			</Shapes>
+			</Presentation>
 
 			<Parameters>			
 				<Parameter>
@@ -10964,7 +10970,7 @@ else{
 			<VmArgs><![CDATA[]]></VmArgs>
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
 
-			<Shapes>
+			<Presentation>
 				<Text>
 					<Id>0</Id>
 					<Name><![CDATA[text]]></Name>
@@ -11229,7 +11235,7 @@ else{
 					</Font>
 					<Alignment>RIGHT</Alignment>
 				</Text>
-			</Shapes>
+			</Presentation>
 
 			<AllowParallelEvaluations>true</AllowParallelEvaluations>
 			<UseFreeformParameters>false</UseFreeformParameters>
@@ -11255,7 +11261,10 @@ else{
 			</RangeVariationParamValue>
 			<RangeVariationParamValue>	
 				<Id>1562578831841</Id>
-				<Type>RANGE</Type>
+				<Type>FIXED</Type>
+				<Expression Class="CodeValue">
+					<Code><![CDATA[500]]></Code>
+				</Expression>
 				<From Class="CodeValue">
 					<Code><![CDATA[100]]></Code>
 				</From>
@@ -11296,7 +11305,7 @@ else{
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
 			</PresentationProperties>
 			<ReplicationsProperties>
-				<UseReplication>true</UseReplication>
+				<UseReplication>false</UseReplication>
 				<FixedReplicationsNumber>true</FixedReplicationsNumber>
 				<ReplicationPerIteration>5</ReplicationPerIteration>
 				<MinimumReplication>2</MinimumReplication>
@@ -11322,6 +11331,8 @@ public class MyList {
     private int k;
     private double ds;
     private double t;
+    
+    private double lu = 0.0; // most recent u (not accumulated)
 
     public MyList(){
         this.id = 0;
@@ -11362,12 +11373,14 @@ public class MyList {
      
     public int getId() { return id; }
     public double getU() { return u; }
+    public double getLU() { return lu; }
     public int getK() { return k; }
     public double getDS() { return ds; }
     public double getT() { return t; }
 
     public void setId(int id) { this.id = id; }
     public void setU(double u) { this.u = u; }
+    public void setLU(double lu) { this.lu = lu; }
     public void setK(int k) { this.k = k; }
     public void setDS(double ds) { this.ds = ds; }
     public void setT(double t) { this.t = t; }
