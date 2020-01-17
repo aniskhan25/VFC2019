@@ -379,6 +379,21 @@
 					</Properties>
 
 				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1579231732276</Id>
+					<Name><![CDATA[numOffloads]]></Name>
+					<X>-150</X><Y>-20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[Integer]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+					</Properties>
+
+				</Variable>
 			</Variables>
 			<Connectors>
 				<Connector>
@@ -1319,14 +1334,15 @@ System.out.println("AvgTasksExecPerVeh: " + (numOfCompletedTasks / numOfVeh) );
 System.out.println("Efficiency: " + (numOfCompletedTasks / (numOfCompletedTasks + failures) )*100);
 System.out.println("------------------------------------------------");
    
-for (double d : regret) {
-//	System.out.format("%.3f\n", d);
-}]]></Action>
+for (int i = 0;i<3600;i++) {
+	System.out.format("%.3f\n", regret.get(i)/numOffloads.get(i));	
+}
+]]></Action>
 				</Event>
 				<Event>
 					<Id>1579165124153</Id>
 					<Name><![CDATA[init]]></Name>
-					<X>-150</X><Y>465</Y>
+					<X>-150</X><Y>460</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1354,6 +1370,7 @@ for (double d : regret) {
 					</Properties>
 					<Action><![CDATA[for (int i = 0;i<3600;i++){
 	regret.add(0.0);
+	numOffloads.add(0);
 }
 ]]></Action>
 				</Event>
@@ -9924,7 +9941,7 @@ double beta = 0.5; // MAB constant
 
 double T = time(MILLISECOND); // current sim time
 
-double u, ds, f, t, lu;
+double u, ds, t, lu, f, q;
 int id, k;
 
 // POPULATE in range vehicle list
@@ -9935,14 +9952,15 @@ for(vehicle v : main.vehicle) {
 
 	double d = this.vehicle.distanceTo(v);
 	
-	if(d < vehicleInRange && d>0.0) {
-
+	if(d < vehicleInRange && d>0.0) {	
+		
 		id = v.getId();
 		
 		f = v.localMips;
+		q = v.taskExecution.waitTime;
 	
 		// delay
-		ds = x/dr + (x*w)/f + y/dr + v.taskExecution.waitTime;
+		ds = x/dr + (x*w)/f + y/dr;
 
 		MyList key = new MyList(id);
 		
@@ -9961,7 +9979,12 @@ for(vehicle v : main.vehicle) {
 			t = tmp.getT();
 											
 			// calculate utility
-			lu = Math.sqrt( (beta * (1 - xp) * (Math.log(T-t)/Math.log(2))) / k );
+			lu = Math.sqrt( (
+					beta * 
+					(1 - xp) * 					
+					(Math.log(T-t)/Math.log(2))
+					) / 
+					(k * (Math.log(q+1)/Math.log(2))) );
 			u -= lu;
 													
 			tmp.setU(u);
@@ -9980,6 +10003,7 @@ for(vehicle v : main.vehicle) {
 			curr.add(new MyList(id, ds/x, 1, ds, T));
 			
 		}
+
 	}
 }
 
@@ -10025,20 +10049,22 @@ else { // offload
 /*
 	// COMPUTE regret
 
+	double loc = x/dr + (x*w)/this.vehicle.localMips + y/dr;
+	double off = x/dr + (x*w)/selectedVehicle.localMips + y/dr + selectedVehicle.taskExecution.waitTime;
+
+	double sd = 0.5*loc + 0.5*off;
+	
+	double regret = off - sd;
+			
 	int idx = (int) Math.round(T/1000); // index corresponds to seconds
 	
-	double regret = 0.0;
-	for (MyList obj : curr) {
-		regret += (obj.getU() - min_key.getU());
-	}
-	if (curr.size() - 1 > 0)
-		regret /= (curr.size() - 1);
-		
-	if(regret>0.0)
-		main.regret.set(idx, (main.regret.get(idx) + regret)/2);
+	main.regret.set(idx, (main.regret.get(idx) + regret));
+	main.numOffloads.set(idx, (main.numOffloads.get(idx) + 1));
 		
 	//System.out.println("U:" + minU + "; Id:" + selectedVehicle.getId());
+	
 */
+
 }
 ]]></EntryAction>
 						<FillColor/>
